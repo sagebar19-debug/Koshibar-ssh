@@ -1,0 +1,25 @@
+services:
+  koshibar-ssh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: koshibar-ssh
+    restart: unless-stopped
+
+    environment:
+      SSH_USER: koshibar
+      SSH_PASSWORD: "CHANGE-ME-STRONG-PASSWORD"
+      DHOST: "127.0.0.1"
+      DPORT: "22"
+      PORT: "8080"
+      PACKSKIP: "1"
+
+    ports:
+      - "443:443/tcp"
+      - "2222:22/tcp"
+      - "8080:8080/tcp"
+
+    volumes:
+      - "/Koshibar/100%/data/home:/home"
+      - "/Koshibar/100%/tls:/Koshibar/100%/tls:ro"
